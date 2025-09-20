@@ -1,18 +1,17 @@
 package com.StudentRegistrationSystem.view;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
  * คลาส View สำหรับสร้างหน้าจอสำหรับเข้าสู่ระบบ (Login Panel)
- * ใช้ GridBagLayout ซ้อนกันเพื่อจัดวางฟอร์มล็อกอินให้อยู่กึ่งกลางของหน้าจออย่างสวยงาม
+ * ใช้ GridBagLayout เพื่อจัดวางองค์ประกอบต่างๆ ในแนวตั้งและให้อยู่กึ่งกลางของหน้าจอ
  */
 public class LoginPanel extends JPanel {
 
     // --- Fields: ส่วนประกอบ UI (Components) ของหน้าจอ ---
     private JTextField studentIdField; // ช่องสำหรับกรอกรหัสนักเรียน หรือ 'admin'
-    private JButton loginButton;       // ปุ่มสำหรับยืนยันการเข้าสู่ระบบ
+    private JButton loginButton;       // ปุ่มสำหรับยืนันการเข้าสู่ระบบ
 
     /**
      * Constructor ของ LoginPanel
@@ -20,58 +19,72 @@ public class LoginPanel extends JPanel {
      */
     public LoginPanel() {
         // --- 1. การตั้งค่า Panel หลัก ---
-        // กำหนด Layout หลักของ Panel เป็น GridBagLayout เพื่อใช้ในการจัดตำแหน่ง Component ให้อยู่กึ่งกลาง
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbcMain = new GridBagConstraints();
+        super(new GridBagLayout());
 
         // --- 2. การสร้าง Panel สำหรับฟอร์ม ---
-        // สร้าง Panel ขึ้นมาอีกชั้นสำหรับจัดวางฟอร์มโดยเฉพาะ ทำให้ง่ายต่อการจัดการ
         JPanel formPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbcForm = new GridBagConstraints();
 
-        // --- 3. การตกแต่ง Panel ฟอร์ม ---
-        // สร้างเส้นขอบแบบผสม: มีทั้งหัวข้อ "Login" และมีระยะห่างภายใน (Padding) เพื่อความสวยงาม
-        Border titledBorder = BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(), "Login");
-        Border padding = BorderFactory.createEmptyBorder(20, 20, 20, 20); // ระยะห่าง 20px รอบด้าน
-        formPanel.setBorder(BorderFactory.createCompoundBorder(titledBorder, padding));
+        // --- 3. กำหนดฟอนต์และขนาดที่ใหญ่ขึ้น ---
+        Font titleFont = new Font("SansSerif", Font.BOLD, 36);
+        Font labelFont = new Font("SansSerif", Font.PLAIN, 16);
+        Font hintFont = new Font("SansSerif", Font.ITALIC, 12);
+        Font inputFont = new Font("SansSerif", Font.PLAIN, 18);
+        Font buttonFont = new Font("SansSerif", Font.BOLD, 18);
 
-        // --- 4. การจัดวาง Component ภายใน formPanel ---
+        // --- 4. การจัดวาง Component ภายใน formPanel (จัดเรียงในแนวตั้ง) ---
 
-        // แถวที่ 0, คอลัมน์ที่ 0: ป้ายกำกับ (Label)
-        JLabel idLabel = new JLabel("Student ID / 'admin':");
-        gbcForm.gridx = 0; // ตำแหน่งคอลัมน์
-        gbcForm.gridy = 0; // ตำแหน่งแถว
-        gbcForm.anchor = GridBagConstraints.WEST; // anchor: จัดตำแหน่ง Component ให้ชิดซ้ายของพื้นที่เซลล์
-        gbcForm.insets = new Insets(5, 5, 5, 10); // insets: กำหนดระยะห่างรอบ Component (บน, ซ้าย, ล่าง, ขวา)
+        // แถวที่ 0: หัวข้อหลัก "Login"
+        JLabel titleLabel = new JLabel("Login");
+        titleLabel.setFont(titleFont);
+        gbcForm.gridx = 0;
+        gbcForm.gridy = 0;
+        gbcForm.anchor = GridBagConstraints.CENTER;
+        gbcForm.insets = new Insets(10, 10, 30, 10);
+        formPanel.add(titleLabel, gbcForm);
+
+        // แถวที่ 1: ป้ายกำกับ (Label) ของช่องกรอกข้อมูล
+        JLabel idLabel = new JLabel("Student ID / Admin");
+        idLabel.setFont(labelFont);
+        gbcForm.gridy = 1;
+        gbcForm.anchor = GridBagConstraints.WEST;
+        gbcForm.insets = new Insets(0, 10, 5, 10);
         formPanel.add(idLabel, gbcForm);
 
-        // แถวที่ 0, คอลัมน์ที่ 1: ช่องกรอกข้อความ (Text Field)
-        studentIdField = new JTextField(15); // กำหนดขนาดเริ่มต้นที่เหมาะสม
-        gbcForm.gridx = 1;
-        gbcForm.gridy = 0;
-        gbcForm.fill = GridBagConstraints.HORIZONTAL; // fill: กำหนดให้ Component ขยายเต็มความกว้างของพื้นที่เซลล์
-        gbcForm.weightx = 1.0; // weightx: ให้น้ำหนักการขยายในแนวนอนแก่ Component นี้ เมื่อมีการปรับขนาดหน้าต่าง
-        gbcForm.insets = new Insets(5, 5, 5, 5);
+        // แถวที่ 2: ข้อความกำกับสำหรับ Admin
+        JLabel adminHintLabel = new JLabel("For admin access, enter \'admin\'");
+        adminHintLabel.setFont(hintFont);        // ใช้ฟอนต์สำหรับคำแนะนำ
+        adminHintLabel.setForeground(Color.GRAY); // ตั้งค่าสีข้อความให้เป็นสีเทา
+        gbcForm.gridy = 2;
+        gbcForm.anchor = GridBagConstraints.WEST;
+        gbcForm.insets = new Insets(0, 10, 10, 10);
+        formPanel.add(adminHintLabel, gbcForm);
+
+        // แถวที่ 3: ช่องกรอกข้อความ (Text Field)
+        studentIdField = new JTextField(20);
+        studentIdField.setFont(inputFont);
+        studentIdField.setPreferredSize(new Dimension(studentIdField.getPreferredSize().width, 40));
+        gbcForm.gridy = 3;
+        gbcForm.fill = GridBagConstraints.HORIZONTAL;
+        gbcForm.weightx = 1.0;
+        gbcForm.insets = new Insets(0, 10, 15, 10);
         formPanel.add(studentIdField, gbcForm);
 
-        // แถวที่ 1, คอลัมน์ที่ 1: ปุ่ม (Button)
+        // แถวที่ 4: ปุ่ม (Button)
         loginButton = new JButton("Login");
-        gbcForm.gridx = 1;
-        gbcForm.gridy = 1;
-        gbcForm.fill = GridBagConstraints.NONE; // ไม่ต้องขยายปุ่ม
-        gbcForm.anchor = GridBagConstraints.EAST; // anchor: จัดตำแหน่ง Component ให้ชิดขวาของพื้นที่เซลล์
-        gbcForm.weightx = 0; // ไม่ต้องให้น้ำหนักการขยาย
-        gbcForm.insets = new Insets(10, 5, 5, 5); // เพิ่มระยะห่างด้านบน เพื่อให้ปุ่มไม่ติดกับช่องกรอกข้อความ
+        loginButton.setFont(buttonFont);
+        loginButton.setPreferredSize(new Dimension(loginButton.getPreferredSize().width, 50));
+        gbcForm.gridy = 4;
+        gbcForm.fill = GridBagConstraints.HORIZONTAL;
+        gbcForm.insets = new Insets(5, 10, 10, 10);
         formPanel.add(loginButton, gbcForm);
 
         // --- 5. การนำ formPanel ไปวางบน Panel หลัก ---
-        // นำ formPanel ที่สร้างเสร็จแล้ว ไปใส่ใน Panel หลัก ซึ่งจะถูกจัดให้อยู่กึ่งกลางโดยอัตโนมัติ
-        add(formPanel, gbcMain);
+        add(formPanel, new GridBagConstraints());
     }
 
     // --- Public Methods: เมธอดสาธารณะสำหรับให้ Controller เรียกใช้ ---
-    
+
     /**
      * ดึงข้อความ ID ที่ผู้ใช้กรอกเข้ามา
      * @return รหัสนักเรียน หรือ 'admin' ที่ถูกตัดช่องว่างหน้า-หลังแล้ว
@@ -79,7 +92,7 @@ public class LoginPanel extends JPanel {
     public String getStudentId() {
         return studentIdField.getText().trim();
     }
-    
+
     /**
      * คืนค่า Object ของปุ่ม Login เพื่อให้ Controller สามารถเพิ่ม Action Listener ได้
      * @return JButton ของปุ่มล็อกอิน
@@ -87,7 +100,7 @@ public class LoginPanel extends JPanel {
     public JButton getLoginButton() {
         return loginButton;
     }
-    
+
     /**
      * ล้างข้อความในช่องกรอก ID
      * ถูกเรียกใช้เมื่อผู้ใช้ทำการ Logout
