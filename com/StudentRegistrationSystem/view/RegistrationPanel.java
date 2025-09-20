@@ -93,7 +93,6 @@ public class RegistrationPanel extends JPanel {
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // จัดปุ่มชิดขวา
         logoutButton = new JButton("Logout");
         logoutButton.setBackground(Color.RED);
-        logoutButton.setForeground(Color.WHITE);
         bottomPanel.add(logoutButton);
 
         // --- 4. ประกอบ Panel ทั้งหมดเข้าด้วยกันบน Layout หลัก ---

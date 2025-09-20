@@ -62,6 +62,8 @@ public class AdminPanel extends JPanel {
         
         saveGradeButton = new JButton("Save Grade");
         logoutButton = new JButton("Logout");
+        logoutButton.setBackground(Color.RED);
+        logoutButton.setForeground(Color.WHITE);
         bottomPanel.add(saveGradeButton);
         bottomPanel.add(logoutButton);
         
