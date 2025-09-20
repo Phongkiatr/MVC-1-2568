@@ -1,0 +1,31 @@
+student_id,prefix,first_name,last_name,date_of_birth,school,email
+69050001,Mr.,John,Doe,2008-05-15,Oakwood High School,john.doe@email.com
+69050002,Ms.,Jane,Smith,2007-11-20,Maple Leaf Academy,jane.smith@email.com
+69050003,Mr.,Peter,Jones,2009-01-10,Oakwood High School,peter.jones@email.com
+69050004,Ms.,Mary,Williams,2008-08-22,Lakeside Preparatory,mary.w@email.com
+69050005,Mr.,David,Brown,2007-03-30,Maple Leaf Academy,david.b@email.com
+69050006,Mr.,Charles,Davis,2008-04-11,Pine Ridge International,charles.d@email.com
+69050007,Ms.,Linda,Miller,2009-02-05,River Valley High,linda.m@email.com
+69050008,Mr.,Robert,Wilson,2007-07-07,Lakeside Preparatory,robert.w@email.com
+69050009,Ms.,Patricia,Moore,2008-09-16,Oakwood High School,patricia.m@email.com
+69050010,Mr.,James,Taylor,2009-06-21,Maple Leaf Academy,james.t@email.com
+69050011,Ms.,Jennifer,Anderson,2007-10-30,River Valley High,jen.anderson@email.com
+69050012,Mr.,Michael,Thomas,2008-12-12,Pine Ridge International,michael.t@email.com
+69050013,Ms.,Susan,Jackson,2009-03-18,Oakwood High School,susan.j@email.com
+69050014,Mr.,William,White,2007-01-25,Lakeside Preparatory,will.white@email.com
+69050015,Ms.,Karen,Harris,2008-02-29,Maple Leaf Academy,karen.h@email.com
+69050016,Mr.,Daniel,Martin,2008-06-10,Oakwood High School,daniel.m@email.com
+69050017,Ms.,Nancy,Thompson,2007-08-14,River Valley High,nancy.t@email.com
+69050018,Mr.,Paul,Garcia,2009-01-01,Pine Ridge International,paul.g@email.com
+69050019,Ms.,Betty,Martinez,2008-11-23,Lakeside Preparatory,betty.m@email.com
+69050020,Mr.,Steven,Robinson,2007-05-19,Maple Leaf Academy,steven.r@email.com
+69050021,Ms.,Sandra,Clark,2009-04-02,Oakwood High School,sandra.c@email.com
+69050022,Mr.,Kevin,Rodriguez,2008-07-28,River Valley High,kevin.r@email.com
+69050023,Ms.,Donna,Lewis,2007-09-03,Lakeside Preparatory,donna.l@email.com
+69050024,Mr.,George,Lee,2009-05-15,Pine Ridge International,george.l@email.com
+69050025,Ms.,Helen,Walker,2008-10-08,Maple Leaf Academy,helen.w@email.com
+69050026,Mr.,Brian,Hall,2007-02-17,Oakwood High School,brian.h@email.com
+69050027,Ms.,Carol,Allen,2009-07-22,River Valley High,carol.a@email.com
+69050028,Mr.,Jason,Young,2008-01-31,Lakeside Preparatory,jason.y@email.com
+69050029,Ms.,Sharon,King,2007-06-25,Pine Ridge International,sharon.k@email.com
+69050030,Mr.,Gary,Wright,2009-08-09,Maple Leaf Academy,gary.w@email.com

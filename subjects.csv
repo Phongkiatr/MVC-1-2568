@@ -1,0 +1,11 @@
+subject_id,subject_name,credits,instructor_name,prerequisite_id,max_capacity,current_enrollment
+05501001,Introduction to Programming,3,Prof. Alan Turing,,30,15
+05501002,Advanced Programming,3,Prof. Ada Lovelace,05501001,25,6
+90692001,World History,3,Dr. Emily Carter,,-1,8
+90693001,Music Appreciation,3,Dr. David Chen,,-1,9
+05502103,Data Structures,3,Prof. Ada Lovelace,05501001,30,8
+05502201,Database Systems,3,Prof. Alan Turing,05501001,10,10
+90691101,Introduction to Philosophy,3,Dr. Emily Carter,,-1,7
+05503401,Web Development,3,Prof. Tim Berners,05501002,25,3
+90694501,Creative Writing,3,Dr. William Shakespeare,,-1,6
+05504101,Artificial Intelligence,3,Prof. Alan Turing,05502103,20,5
