@@ -6,21 +6,22 @@ import javax.swing.table.DefaultTableModel;
 import com.StudentRegistrationSystem.model.DataAccessService;
 import com.StudentRegistrationSystem.model.Enrollment;
 import com.StudentRegistrationSystem.model.Student;
+import com.StudentRegistrationSystem.model.Subject;
 
 import java.awt.*;
 import java.util.List;
 
 /**
  * คลาส View สำหรับสร้างหน้าจอการทำงานของผู้ดูแลระบบ (Admin Panel)
- * ประกอบด้วยส่วนประกอบ UI สำหรับเลือกนักเรียน, ดูรายวิชาที่ลงทะเบียน, และแก้ไขเกรด
+ * ประกอบด้วยส่วนประกอบ UI สำหรับเลือกรายวิชา, ดูรายชื่อนักเรียนที่ลงทะเบียนในวิชานั้น, และแก้ไขเกรด
  */
 public class AdminPanel extends JPanel {
 
     // --- Fields: ส่วนประกอบ UI (Components) ของหน้าจอ ---
 
-    private JComboBox<String> studentComboBox;    // Dropdown สำหรับเลือกนักเรียน
-    private JTable enrollmentsTable;              // ตารางสำหรับแสดงรายวิชาที่นักเรียนลงทะเบียน
-    private DefaultTableModel tableModel;         // โมเดลสำหรับจัดการข้อมูลในตาราง enrollmentsTable
+    private JComboBox<String> subjectComboBox;    // Dropdown สำหรับเลือกรายวิชา
+    private JTable studentsTable;                 // ตารางสำหรับแสดงรายชื่อนักเรียนในวิชาที่เลือก
+    private DefaultTableModel tableModel;         // โมเดลสำหรับจัดการข้อมูลในตาราง
     private JComboBox<String> gradeComboBox;      // Dropdown สำหรับเลือกเกรดที่จะบันทึก
     private JButton saveGradeButton;              // ปุ่มสำหรับบันทึกเกรด
     private JButton logoutButton;                 // ปุ่มสำหรับออกจากระบบ
@@ -34,14 +35,14 @@ public class AdminPanel extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // --- 1. ส่วนบน (North): สำหรับการเลือกนักเรียน ---
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // จัดชิดซ้าย
-        topPanel.add(new JLabel("Select Student:"));
-        studentComboBox = new JComboBox<>();
-        topPanel.add(studentComboBox);
+        // --- 1. ส่วนบน (North): สำหรับการเลือกรายวิชา ---
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topPanel.add(new JLabel("Select Subject:"));
+        subjectComboBox = new JComboBox<>();
+        topPanel.add(subjectComboBox);
 
-        // --- 2. ส่วนกลาง (Center): สำหรับตารางแสดงข้อมูล ---
-        String[] columnNames = {"Subject ID", "Subject Name", "Current Grade"};
+        // --- 2. ส่วนกลาง (Center): สำหรับตารางแสดงข้อมูลนักเรียน ---
+        String[] columnNames = {"Student ID", "Student Name", "Current Grade"};
         // สร้าง Table Model โดยป้องกันการแก้ไขข้อมูลในเซลล์โดยตรง
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
@@ -49,15 +50,13 @@ public class AdminPanel extends JPanel {
                 return false;
             }
         };
-        enrollmentsTable = new JTable(tableModel);
-        enrollmentsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // อนุญาตให้เลือกได้ทีละแถวเท่านั้น
-        JScrollPane scrollPane = new JScrollPane(enrollmentsTable); // เพิ่ม Scroll bar ให้ตาราง
+        studentsTable = new JTable(tableModel);
+        studentsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane(studentsTable);
 
-        // --- 3. ส่วนล่าง (South): สำหรับการกรอกเกรดและปุ่มคำสั่ง ---
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // จัดชิดขวา
+        // --- 3. ส่วนล่าง (South): สำหรับการเลือกเกรดและปุ่มคำสั่ง ---
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         bottomPanel.add(new JLabel("Select Grade:"));
-
-        // สร้าง Dropdown (ComboBox) สำหรับเกรด เพื่อป้องกันการกรอกข้อมูลผิดพลาด
         String[] validGrades = {"", "A", "B+", "B", "C+", "C", "D+", "D", "F"};
         gradeComboBox = new JComboBox<>(validGrades);
         bottomPanel.add(gradeComboBox);
@@ -75,12 +74,12 @@ public class AdminPanel extends JPanel {
 
     // --- Public Methods: เมธอดสาธารณะสำหรับให้ Controller เรียกใช้ ---
 
-    public JComboBox<String> getStudentComboBox() {
-        return studentComboBox;
+    public JComboBox<String> getSubjectComboBox() {
+        return subjectComboBox;
     }
 
-    public JTable getEnrollmentsTable() {
-        return enrollmentsTable;
+    public JTable getStudentsTable() {
+        return studentsTable;
     }
 
     public DefaultTableModel getTableModel() {
@@ -94,45 +93,39 @@ public class AdminPanel extends JPanel {
     public JButton getLogoutButton() {
         return logoutButton;
     }
-    
-    /**
-     * ดึงค่าเกรดที่ถูกเลือกจาก ComboBox
-     * @return ค่าเกรดที่เลือก (เช่น "A", "B+")
-     */
+
     public String getGrade() {
         return (String) gradeComboBox.getSelectedItem();
     }
     
     /**
-     * เติมรายชื่อนักเรียนทั้งหมดลงใน ComboBox สำหรับการเลือก
-     * @param students List ของนักเรียนทั้งหมดในระบบ
+     * เติมรายชื่อวิชาทั้งหมดลงใน ComboBox สำหรับการเลือก
+     * @param subjects List ของวิชาทั้งหมดในระบบ
      */
-    public void populateStudentList(List<Student> students) {
-        studentComboBox.removeAllItems(); // ล้างข้อมูลเก่าออกก่อน
-        studentComboBox.addItem("-- Select a Student --"); // เพิ่มตัวเลือกเริ่มต้น
-        for (Student student : students) {
-            // เพิ่มนักเรียนแต่ละคนในรูปแบบ "ID - ชื่อ"
-            studentComboBox.addItem(student.getStudentId() + " - " + student.getFirstName());
+    public void populateSubjectList(List<Subject> subjects) {
+        subjectComboBox.removeAllItems();
+        subjectComboBox.addItem("-- Select a Subject --");
+        for (Subject subject : subjects) {
+            subjectComboBox.addItem(subject.getSubjectId() + " - " + subject.getSubjectName());
         }
     }
     
     /**
-     * อัปเดตข้อมูลในตาราง enrollmentsTable ให้แสดงรายวิชาของนักเรียนที่ถูกเลือก
-     * @param enrollments List ของการลงทะเบียนทั้งหมดของนักเรียนคนนั้น
-     * @param dataAccess  Service สำหรับใช้ค้นหาชื่อวิชาจากรหัสวิชา
+     * อัปเดตข้อมูลในตารางให้แสดงรายชื่อนักเรียนของวิชาที่ถูกเลือก
+     * @param enrollments List ของการลงทะเบียนทั้งหมดของวิชานั้น
+     * @param dataAccess  Service สำหรับใช้ค้นหาชื่อนักเรียนจากรหัสนักเรียน
      */
-    public void updateEnrollmentsTable(List<Enrollment> enrollments, DataAccessService dataAccess) {
-        tableModel.setRowCount(0); // ล้างข้อมูลเก่าในตารางออกทั้งหมด
+    public void updateStudentsTable(List<Enrollment> enrollments, DataAccessService dataAccess) {
+        tableModel.setRowCount(0);
         
-        // วนลูปเพื่อเพิ่มข้อมูลการลงทะเบียนแต่ละรายการลงในตาราง
         for (Enrollment e : enrollments) {
-            // ค้นหาชื่อวิชาจากรหัสวิชา เพื่อการแสดงผลที่เป็นมิตรต่อผู้ใช้
-            String subjectName = dataAccess.findSubjectById(e.getSubjectId())
-                                           .map(s -> s.getSubjectName())
-                                           .orElse("Unknown Subject"); // หากไม่พบชื่อวิชา
+            // ค้นหาชื่อนักเรียนจากรหัสนักเรียน เพื่อการแสดงผลที่เป็นมิตรต่อผู้ใช้
+            String studentName = dataAccess.findStudentById(e.getStudentId())
+                                           .map(s -> s.getFirstName() + " " + s.getLastName())
+                                           .orElse("Unknown Student");
             
-            Object[] row = {e.getSubjectId(), subjectName, e.getGrade()};
-            tableModel.addRow(row); // เพิ่มแถวใหม่ลงในตาราง
+            Object[] row = {e.getStudentId(), studentName, e.getGrade()};
+            tableModel.addRow(row);
         }
     }
 }
