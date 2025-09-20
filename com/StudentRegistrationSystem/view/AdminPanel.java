@@ -5,7 +5,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.StudentRegistrationSystem.model.DataAccessService;
 import com.StudentRegistrationSystem.model.Enrollment;
-import com.StudentRegistrationSystem.model.Student;
 import com.StudentRegistrationSystem.model.Subject;
 
 import java.awt.*;
