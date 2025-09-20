@@ -1,4 +1,4 @@
-package com.example.model;
+package com.StudentRegistrationSystem.model;
 
 import java.util.Optional;
 import java.util.Set;

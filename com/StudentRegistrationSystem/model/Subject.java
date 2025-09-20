@@ -1,4 +1,4 @@
-package com.example.model;
+package com.StudentRegistrationSystem.model;
 
 /**
  * คลาส Model สำหรับจัดเก็บข้อมูลของรายวิชา (Subject)

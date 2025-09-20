@@ -1,4 +1,4 @@
-package com.example.view;
+package com.StudentRegistrationSystem.view;
 
 import javax.swing.*;
 import java.awt.*;

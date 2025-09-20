@@ -1,4 +1,4 @@
-package com.example.model;
+package com.StudentRegistrationSystem.model;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicInteger;

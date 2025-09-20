@@ -1,4 +1,4 @@
-package com.example.model;
+package com.StudentRegistrationSystem.model;
 
 import java.time.LocalDate;
 import java.time.Period;
